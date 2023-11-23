@@ -1,5 +1,4 @@
 {
-  "scheme": "altaml",
   "expo": {
     "name": "AltaML",
     "slug": "altaml",
@@ -7,6 +6,7 @@
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
+    "scheme": "altaml",
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
