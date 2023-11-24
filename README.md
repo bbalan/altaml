@@ -4,8 +4,8 @@ A toy app built as an interview conversation topic.
 
 Built with React Native, Expo, Typescript, and Redux Toolkit.
 
-[Screenshot 1](https://raw.githubusercontent.com/bbalan/altaml/master/assets/screenshots/screen1.jpg 'Screenshot 1')
-[Screenshot 2](https://raw.githubusercontent.com/bbalan/altaml/master/assets/screenshots/screen2.jpg 'Screenshot 2')
+<img src="https://raw.githubusercontent.com/bbalan/altaml/master/assets/screenshots/screen1.jpg" alt="Screenshot 1" width="300" />
+<img src="https://raw.githubusercontent.com/bbalan/altaml/master/assets/screenshots/screen2.jpg" alt="Screenshot 2" width="300" />
 
 ## Running the app
 
