@@ -1,10 +1,4 @@
-import {
-  KeyboardAvoidingView,
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-} from 'react-native'
+import { KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native'
 import { Button, Input } from '@rneui/themed'
 import { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
@@ -16,17 +10,6 @@ import { useTransparentNavBar } from 'src/utils/useTransparentNavBar'
  * We use a simple validation regex here and rely on a confirmation email for more robust validation.
  */
 const isValidEmail = (str: string) => /^\S+@\S+\.\S+$/.test(str)
-
-// KeyboardAvoidingView is only needed on iOS, so we omit it elsewhere.
-const Wrapper = ({ children }) => {
-  if (Platform.OS !== 'ios') return <>{children}</>
-
-  return (
-    <KeyboardAvoidingView behavior="height" style={styles.container}>
-      {children}
-    </KeyboardAvoidingView>
-  )
-}
 
 /**
  * The initial login page.
@@ -86,13 +69,15 @@ const Index = () => {
   else if (!isLoginValid) loginErrorMessage = 'Email or password is incorrect.'
 
   return (
-    <Wrapper>
+    <KeyboardAvoidingView behavior="height" style={styles.container}>
       <SafeAreaView edges={['top']} style={[styles.container]}>
         <View style={[styles.container]}>
           <View style={styles.loginBox}>
             <View style={styles.header}>
               <Text style={styles.titleText}>Welcome</Text>
-              <Text>Please sign in to continue.</Text>
+              <Text style={styles.signin}>Please sign in to continue.</Text>
+              <Text>Email: user@domain.com</Text>
+              <Text>Password: password</Text>
             </View>
 
             <View style={styles.form}>
@@ -123,7 +108,7 @@ const Index = () => {
           </View>
         </View>
       </SafeAreaView>
-    </Wrapper>
+    </KeyboardAvoidingView>
   )
 }
 
@@ -156,6 +141,9 @@ const styles = StyleSheet.create({
   titleText: {
     fontWeight: 'bold',
     fontSize: 30,
+    marginBottom: 12,
+  },
+  signin: {
     marginBottom: 12,
   },
   form: {
