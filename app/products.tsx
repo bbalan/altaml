@@ -1,7 +1,8 @@
 import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import SignOutButton from '../src/components/SignOutButton'
+import ProductList from '../src/components/Products/ProductList'
 
 const Products = () => {
   return (
@@ -13,7 +14,7 @@ const Products = () => {
           headerRight: SignOutButton,
         }}
       />
-      <Text>Products</Text>
+      <ProductList />
       <StatusBar style="auto" />
     </View>
   )
