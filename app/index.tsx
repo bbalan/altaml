@@ -9,6 +9,7 @@ import { Button, Input } from '@rneui/themed'
 import { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { router } from 'expo-router'
+import { useTransparentNavBar } from 'src/utils/useTransparentNavBar'
 
 /**
  * Validate the customer's email.
@@ -31,6 +32,8 @@ const Wrapper = ({ children }) => {
  * The initial login page.
  */
 const Index = () => {
+  useTransparentNavBar()
+
   // Store form values so we can send them on submit.
   const [email, setEmail] = useState('user@domain.com')
   const [password, setPassword] = useState('password')

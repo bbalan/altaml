@@ -1,7 +1,8 @@
 import React from 'react'
-import { ScrollView, StyleSheet, Text, View } from 'react-native'
+import { ScrollView, StyleSheet } from 'react-native'
 import ProductListItem from '../ProductListItem'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { useTransparentNavBar } from 'src/utils/useTransparentNavBar'
 
 const productJson = {
   image: 'https://placekitten.com/200/200',
@@ -11,16 +12,18 @@ const productJson = {
 }
 
 const ProductList = () => {
+  useTransparentNavBar()
+
   const products = [...Array<typeof productJson>(10)].fill(productJson)
 
   return (
-    <SafeAreaView edges={['bottom']} style={styles.container}>
-      <ScrollView>
+    <ScrollView style={styles.container}>
+      <SafeAreaView edges={['bottom']}>
         {products.map((product, i) => (
           <ProductListItem key={i} {...product} />
         ))}
-      </ScrollView>
-    </SafeAreaView>
+      </SafeAreaView>
+    </ScrollView>
   )
 }
 
