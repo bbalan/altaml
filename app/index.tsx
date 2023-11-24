@@ -45,7 +45,7 @@ const Index = () => {
 
     try {
       const response = await fetch(
-        'https://raw.githubusercontent.com/bbalan/altaml/master/assets/user.json',
+        'https://raw.githubusercontent.com/bbalan/altaml/master/assets/json/user.json',
       )
       const json = await response.json()
 

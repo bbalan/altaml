@@ -1,0 +1,72 @@
+[
+  {
+    "name": "John Deere 6120E",
+    "category": "Utility tractor",
+    "image": "",
+    "price": "359000",
+    "description": "Engine HP: 122 Max | 120 Rated\nJohn Deere FT4 PowerTech™ engine combines performance and fluid economy\n12/12 or 24/12 hi-lo PowrReverser™ transmission\nCab, open station, 2WD or MFWD\n15 degrees of seat swivel with optional air-ride seat"
+  },
+  {
+    "name": "CLAAS LEXION 8000",
+    "category": "Combine",
+    "image": "",
+    "price": "1200000",
+    "description": "The optimized LEXION models are the most productive machines on the market - measured in terms of harvested areas or tons per year. Even when operating in unfavorable conditions, they can be counted on to bring their strengths to bear precisely when you really need maximum performance. So you can save time and fuel while operating more productively than ever before. "
+  },
+  {
+    "name": "Kubota R430",
+    "category": "Bale Chopper",
+    "image": "",
+    "price": "259000",
+    "description": "Equipped with state of the art features, Kubota’s R30 series range offers outstanding visibility, powerful performance and increased productivity. With quick couplers and auxiliary hydraulics, Kubota’s R30 series wheel loaders can operate a wide variety of attachments. Compact in design, the R30 series features fully articulated steering for easy navigation in tight spaces. With an oscillating body and long wheel base, the R30 series offers superior stability and strong traction on tough terrain. The Kubota R30 series offers true versatility for any job."
+  },
+  {
+    "name": "John Deere 325G",
+    "category": "Compact Track Loader",
+    "image": "",
+    "price": "84881",
+    "description": "Gross Power: 54.8 kW (74 hp)\nNet Power: 52.5 kW (70 hp)\nRated Operating Capacity: 1 176 kg (2,590 lb.)\nOperating Weight: 4 313 kg (9,500 lb.)"
+  },
+  {
+    "name": "John Deere 622G/GP",
+    "category": "Motor Grader",
+    "image": "",
+    "price": "1100000",
+    "description": "Net Power: 168 kW (225 hp)\nOperating Weight: 19 100 kg (42,108 lb.)\nBlade Pull: 20 412 kg (45,000 lb.)\nNet Torque Rise: 38%"
+  },
+  {
+    "name": "Cat 415 IL",
+    "category": "Motor Grader",
+    "image": "",
+    "price": "700000",
+    "description": "The Cat® 415 IL Industrial Loader delivers great performance, improved fuel efficiency, and a superior hydraulic system."
+  },
+  {
+    "name": "CLAAS TORION 2014 / 1913",
+    "category": "Loader",
+    "image": "",
+    "price": "650000",
+    "description": "The unique engine mounting position ensures high stability and resistance to tipping.\nWith the high-lift mast your bucket pivot point is at 4,700 mm.\nEven new drivers will familiarise themselves quickly with the intuitive operating concept.\nThe smart light control illuminates 360° of your surroundings."
+  },
+  {
+    "name": "Kubota RTV520",
+    "category": "Mid Size Gas Utility Vehicle",
+    "image": "",
+    "price": "14073",
+    "description": "Nimble and mighty. The Kubota RTV520 delivers the rugged versatility to work at home and the job site. It comes with the power to tow, haul and get more done even in tight spaces—as well as the superior build quality to outlast challenging terrain."
+  },
+  {
+    "name": "Kubota BC1300 Pro",
+    "category": "Bale Chopper",
+    "image": "",
+    "price": "55000",
+    "description": "Solid construction ensures reliable performance and long machine life. These models features a heavy duty transmission with two speed gearbox for bedding and feeding. The floor conveyor drive is also heavy duty to cope with high material volumes. "
+  },
+  {
+    "name": "Cat MH3022",
+    "category": "Wheel Material Handler",
+    "image": "",
+    "price": "250000",
+    "description": "We know that when it comes to material handling equipment, your success depends on productivity and low operating costs. The Cat MH3022 is a purpose-built material handler that features simple-to-use technologies, a redesigned cab for enhanced comfort, and more options to match your work. Combine these features with up to 10% lower operating costs, and you have a safe, quality and reliable product that will provide you with the superior performance you need for your toughest indoor material handling applications."
+  }
+]
