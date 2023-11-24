@@ -14,12 +14,10 @@ import { router } from 'expo-router'
  * Validate the customer's email.
  * We use a simple validation regex here and rely on a confirmation email for more robust validation.
  */
-function isValidEmail(str: string) {
-  return /^\S+@\S+\.\S+$/.test(str)
-}
+const isValidEmail = (str: string) => /^\S+@\S+\.\S+$/.test(str)
 
 // KeyboardAvoidingView is only needed on iOS, so we omit it elsewhere.
-function Wrapper({ children }) {
+const Wrapper = ({ children }) => {
   if (Platform.OS !== 'ios') return <>{children}</>
 
   return (
@@ -32,7 +30,7 @@ function Wrapper({ children }) {
 /**
  * The initial login page.
  */
-function Index() {
+const Index = () => {
   // Store form values so we can send them on submit.
   const [email, setEmail] = useState('user@domain.com')
   const [password, setPassword] = useState('password')
@@ -61,7 +59,11 @@ function Index() {
       const json = await response.json()
 
       setIsLoginRequestSuccess(true)
-      setIsLoginValid(email === json.email && password === json.password)
+
+      const isLoginValid = email === json.email && password === json.password
+      setIsLoginValid(isLoginValid)
+
+      if (!isLoginValid) return
 
       router.replace('/products')
     } catch (error) {

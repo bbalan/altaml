@@ -6,6 +6,7 @@ export default function Layout() {
       screenOptions={{
         statusBarTranslucent: true,
         headerShown: false,
+        animation: 'slide_from_right',
       }}
     />
   )
