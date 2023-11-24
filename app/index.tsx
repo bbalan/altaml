@@ -1,4 +1,3 @@
-import { StatusBar } from 'expo-status-bar'
 import {
   KeyboardAvoidingView,
   Platform,
@@ -9,6 +8,7 @@ import {
 import { Button, Input } from '@rneui/themed'
 import { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
+import { router } from 'expo-router'
 
 /**
  * Validate the customer's email.
@@ -18,7 +18,7 @@ function isValidEmail(str: string) {
   return /^\S+@\S+\.\S+$/.test(str)
 }
 
-// KeyboardAvoidingView is only required on iOS
+// KeyboardAvoidingView is only needed on iOS, so we omit it elsewhere.
 function Wrapper({ children }) {
   if (Platform.OS !== 'ios') return <>{children}</>
 
@@ -33,15 +33,50 @@ function Wrapper({ children }) {
  * The initial login page.
  */
 function Index() {
+  // Store form values so we can send them on submit.
+  const [email, setEmail] = useState('user@domain.com')
+  const [password, setPassword] = useState('password')
+
+  // Store validation errors.
   const [isEmailValid, setIsEmailValid] = useState(true)
+  const [isLoginValid, setIsLoginValid] = useState(true)
+  const [isLoginRequestSuccess, setIsLoginRequestSuccess] = useState(true)
+
   const [didBlurEmailWithErrors, setDidBlurEmailWithErrors] = useState(false)
 
-  const validateEmail = (str: string) => setIsEmailValid(isValidEmail(str))
+  const onChangeEmail = (str: string) => {
+    setEmail(str)
+    setIsEmailValid(isValidEmail(str))
+  }
+
   const onBlurEmail = () => setDidBlurEmailWithErrors(!isEmailValid)
 
-  const onSubmit = () => {}
+  // Make a request to a mock sign-in endpoint, which returns user data.
+  // In reality, this would return status 401 or 200, plus user data on success.
+  const onSubmit = async () => {
+    try {
+      const response = await fetch(
+        'https://raw.githubusercontent.com/bbalan/altaml/master/assets/user.json',
+      )
+      const json = await response.json()
 
-  const showErrorMessage = !isEmailValid && didBlurEmailWithErrors
+      setIsLoginRequestSuccess(true)
+      setIsLoginValid(email === json.email && password === json.password)
+
+      router.replace('/products')
+    } catch (error) {
+      console.error(error)
+      setIsLoginRequestSuccess(false)
+    }
+  }
+
+  const showEmailErrorMessage = !isEmailValid && didBlurEmailWithErrors
+  const showLoginErrorMessage = !isLoginValid || !isLoginRequestSuccess
+
+  let loginErrorMessage = ''
+  if (!isLoginRequestSuccess)
+    loginErrorMessage = 'Error while logging in. Please try again later.'
+  else if (!isLoginValid) loginErrorMessage = 'Email or password is incorrect.'
 
   return (
     <Wrapper>
@@ -55,22 +90,31 @@ function Index() {
 
             <View style={styles.form}>
               <Input
+                value={email}
                 keyboardType="email-address"
                 placeholder="Email"
-                onChangeText={validateEmail}
+                onChangeText={onChangeEmail}
                 onBlur={onBlurEmail}
                 errorMessage={
-                  showErrorMessage && 'Please enter your email address.'
+                  showEmailErrorMessage && 'Please enter your email address.'
                 }
                 errorStyle={styles.inputError}
               />
-              <Input placeholder="Password" secureTextEntry />
-              <Button onPress={onSubmit}>Submit</Button>
+              <Input
+                value={password}
+                placeholder="Password"
+                onChangeText={setPassword}
+                errorMessage={showLoginErrorMessage && loginErrorMessage}
+                errorStyle={styles.inputError}
+                secureTextEntry
+              />
+
+              <View style={styles.button}>
+                <Button onPress={onSubmit}>Submit</Button>
+              </View>
             </View>
           </View>
         </View>
-
-        <StatusBar style="dark" translucent={true} />
       </SafeAreaView>
     </Wrapper>
   )
@@ -80,7 +124,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     width: '100%',
-    backgroundColor: '#ddd',
+    backgroundColor: '#2f7dbd',
     alignItems: 'center',
     justifyContent: 'center',
   },
@@ -104,14 +148,18 @@ const styles = StyleSheet.create({
   },
   titleText: {
     fontWeight: 'bold',
-    fontSize: 20,
+    fontSize: 30,
     marginBottom: 12,
   },
   form: {
-    marginTop: 48,
+    marginTop: 24,
   },
   inputError: {
     marginLeft: 0,
+  },
+  button: {
+    marginTop: 12,
+    marginHorizontal: 10,
   },
 })
 

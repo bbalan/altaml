@@ -5,6 +5,7 @@ export default function Layout() {
     <Stack
       screenOptions={{
         statusBarTranslucent: true,
+        headerShown: false,
       }}
     />
   )
