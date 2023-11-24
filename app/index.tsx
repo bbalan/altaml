@@ -1,8 +1,13 @@
 import { StatusBar } from 'expo-status-bar'
-import { KeyboardAvoidingView, StyleSheet, Text, View } from 'react-native'
+import {
+  KeyboardAvoidingView,
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+} from 'react-native'
 import { Button, Input } from '@rneui/themed'
-import { useEffect, useState } from 'react'
-import { useNavigation } from 'expo-router'
+import { useState } from 'react'
 import { SafeAreaView } from 'react-native-safe-area-context'
 
 /**
@@ -13,6 +18,17 @@ function isValidEmail(str: string) {
   return /^\S+@\S+\.\S+$/.test(str)
 }
 
+// KeyboardAvoidingView is only required on iOS
+function Wrapper({ children }) {
+  if (Platform.OS !== 'ios') return <>{children}</>
+
+  return (
+    <KeyboardAvoidingView behavior="height" style={styles.container}>
+      {children}
+    </KeyboardAvoidingView>
+  )
+}
+
 /**
  * The initial login page.
  */
@@ -20,53 +36,43 @@ function Index() {
   const [isEmailValid, setIsEmailValid] = useState(true)
   const [didBlurEmailWithErrors, setDidBlurEmailWithErrors] = useState(false)
 
-  const navigation = useNavigation()
+  const validateEmail = (str: string) => setIsEmailValid(isValidEmail(str))
+  const onBlurEmail = () => setDidBlurEmailWithErrors(!isEmailValid)
 
-  useEffect(() => {
-    navigation.setOptions({ headerShown: false })
-  }, [navigation])
-
-  function validateEmail(str: string) {
-    const isEmailValid = isValidEmail(str)
-    setIsEmailValid(isEmailValid)
-  }
-
-  function onBlurEmail() {
-    setDidBlurEmailWithErrors(!isEmailValid)
-  }
+  const onSubmit = () => {}
 
   const showErrorMessage = !isEmailValid && didBlurEmailWithErrors
 
   return (
-    <KeyboardAvoidingView behavior="height" style={styles.container}>
+    <Wrapper>
       <SafeAreaView edges={['top']} style={[styles.container]}>
         <View style={[styles.container]}>
           <View style={styles.loginBox}>
             <View style={styles.header}>
               <Text style={styles.titleText}>Welcome</Text>
-              <Text style={styles.subtitleText}>
-                Please sign in to continue.
-              </Text>
+              <Text>Please sign in to continue.</Text>
             </View>
 
             <View style={styles.form}>
               <Input
-                style={styles.input}
                 keyboardType="email-address"
                 placeholder="Email"
                 onChangeText={validateEmail}
                 onBlur={onBlurEmail}
-                errorMessage={showErrorMessage && 'Please enter a valid email.'}
+                errorMessage={
+                  showErrorMessage && 'Please enter your email address.'
+                }
+                errorStyle={styles.inputError}
               />
               <Input placeholder="Password" secureTextEntry />
-              <Button>Submit</Button>
+              <Button onPress={onSubmit}>Submit</Button>
             </View>
           </View>
         </View>
 
         <StatusBar style="dark" translucent={true} />
       </SafeAreaView>
-    </KeyboardAvoidingView>
+    </Wrapper>
   )
 }
 
@@ -85,8 +91,8 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     padding: 24,
     paddingVertical: 48,
-
     borderRadius: 10,
+
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 4 },
     shadowOpacity: 0.2,
@@ -101,11 +107,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     marginBottom: 12,
   },
-  subtitleText: {},
   form: {
     marginTop: 48,
   },
-  input: {},
+  inputError: {
+    marginLeft: 0,
+  },
 })
 
 export default Index
