@@ -52,6 +52,8 @@ const Index = () => {
   // Make a request to a mock sign-in endpoint, which returns user data.
   // In reality, this would return status 401 or 200, plus user data on success.
   const onSubmit = async () => {
+    onBlurEmail()
+
     try {
       const response = await fetch(
         'https://raw.githubusercontent.com/bbalan/altaml/master/assets/user.json',
