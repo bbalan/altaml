@@ -1,9 +1,18 @@
+import { Stack } from 'expo-router'
 import { StatusBar } from 'expo-status-bar'
 import { StyleSheet, Text, View } from 'react-native'
+import SignOutButton from '../src/components/SignOutButton'
 
-export default function Products() {
+const Products = () => {
   return (
     <View style={styles.container}>
+      <Stack.Screen
+        options={{
+          headerTitle: 'Products',
+          headerShown: true,
+          headerRight: SignOutButton,
+        }}
+      />
       <Text>Products</Text>
       <StatusBar style="auto" />
     </View>
@@ -18,3 +27,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
   },
 })
+
+export default Products
