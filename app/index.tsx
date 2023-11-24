@@ -17,6 +17,8 @@ const isValidEmail = (str: string) => /^\S+@\S+\.\S+$/.test(str)
 const Index = () => {
   useTransparentNavBar()
 
+  const [isSubmitting, setIsSubmitting] = useState(false)
+
   // Store form values so we can send them on submit.
   const [email, setEmail] = useState('user@domain.com')
   const [password, setPassword] = useState('password')
@@ -39,6 +41,7 @@ const Index = () => {
   // In reality, this would return status 401 or 200, plus user data on success.
   const onSubmit = async () => {
     onBlurEmail()
+    setIsSubmitting(true)
 
     try {
       const response = await fetch(
@@ -51,13 +54,13 @@ const Index = () => {
       const isLoginValid = email === json.email && password === json.password
       setIsLoginValid(isLoginValid)
 
-      if (!isLoginValid) return
-
-      router.replace('/products')
+      if (isLoginValid) router.replace('/products')
     } catch (error) {
       console.error(error)
       setIsLoginRequestSuccess(false)
     }
+
+    setIsSubmitting(false)
   }
 
   const showEmailErrorMessage = !isEmailValid && didBlurEmailWithErrors
@@ -102,7 +105,9 @@ const Index = () => {
               />
 
               <View style={styles.button}>
-                <Button onPress={onSubmit}>Submit</Button>
+                <Button onPress={onSubmit} disabled={isSubmitting}>
+                  Submit
+                </Button>
               </View>
             </View>
           </View>
