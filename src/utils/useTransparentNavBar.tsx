@@ -9,5 +9,5 @@ export const useTransparentNavBar = () => {
       NavBar.setPositionAsync('absolute')
       NavBar.setBackgroundColorAsync('#00000000')
     }
-  })
+  }, [])
 }

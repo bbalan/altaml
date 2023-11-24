@@ -1,27 +1,42 @@
-import React from 'react'
-import { ScrollView, StyleSheet } from 'react-native'
+import React, { useEffect } from 'react'
+import { ScrollView, StyleSheet, Text } from 'react-native'
 import ProductListItem from '../ProductListItem'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useTransparentNavBar } from 'src/utils/useTransparentNavBar'
-
-const productJson = {
-  image: 'https://placekitten.com/200/200',
-  name: 'Cat',
-  price: 200,
-  description: "It's a cat.",
-}
+import { useDispatch, useSelector } from 'react-redux'
+import {
+  fetchProducts,
+  loadingStatusSelector,
+  selectAll,
+} from 'src/store/products'
+import { AppDispatch } from 'src/store'
 
 const ProductList = () => {
   useTransparentNavBar()
 
-  const products = [...Array<typeof productJson>(10)].fill(productJson)
+  const dispatch = useDispatch<AppDispatch>()
+  const products = useSelector(selectAll)
+  const loadingStatus = useSelector(loadingStatusSelector)
+
+  useEffect(() => {
+    dispatch(fetchProducts())
+  }, [])
 
   return (
     <ScrollView style={styles.container}>
       <SafeAreaView edges={['bottom']}>
-        {products.map((product, i) => (
-          <ProductListItem key={i} {...product} />
-        ))}
+        {loadingStatus === 'success' &&
+          products.map(product => (
+            <ProductListItem key={product.id} product={product} />
+          ))}
+
+        {loadingStatus === 'loading' && (
+          <Text style={styles.loading}>Loading...</Text>
+        )}
+
+        {loadingStatus === 'error' && (
+          <Text style={styles.error}>Error loading products</Text>
+        )}
       </SafeAreaView>
     </ScrollView>
   )
@@ -32,6 +47,12 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingTop: 12,
     backgroundColor: '#2f7dbd',
+  },
+  loading: {
+    color: 'white',
+  },
+  error: {
+    color: 'white',
   },
 })
 

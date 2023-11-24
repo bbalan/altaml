@@ -1,14 +1,14 @@
 import React from 'react'
 import { Image, StyleSheet, Text, View } from 'react-native'
+import { Product } from 'src/store/products'
 
 interface Props {
-  name: string
-  price: number
-  description?: string
-  image?: string
+  product: Product
 }
 
-const ProductListItem = ({ name, price, description, image }: Props) => {
+const ProductListItem = ({ product }: Props) => {
+  const { name, image, price, description } = product
+
   return (
     <View style={styles.container}>
       {image && <Image source={{ uri: image }} style={styles.image} />}
@@ -26,13 +26,13 @@ const ProductListItem = ({ name, price, description, image }: Props) => {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    flexDirection: 'row',
+    // flexDirection: 'row',
 
     backgroundColor: 'white',
     marginHorizontal: 12,
     marginBottom: 12,
-    paddingHorizontal: 12,
-    paddingVertical: 12,
+    paddingHorizontal: 16,
+    paddingVertical: 16,
     borderRadius: 10,
 
     shadowColor: '#000',
@@ -42,13 +42,15 @@ const styles = StyleSheet.create({
     elevation: 3,
   },
   image: {
-    width: 100,
-    height: 100,
+    backgroundColor: 'white',
+    width: '100%',
+    height: 250,
     borderRadius: 4,
+    marginBottom: 12,
+    resizeMode: 'cover',
   },
   text: {
     flex: 1,
-    marginLeft: 12,
     overflow: 'hidden',
   },
   header: {
@@ -57,12 +59,13 @@ const styles = StyleSheet.create({
   },
   name: {
     flexGrow: 1,
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
     marginRight: 12,
   },
   price: {
     fontSize: 16,
+    top: 4,
   },
   description: {
     overflow: 'hidden',
