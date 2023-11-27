@@ -9,17 +9,10 @@ describe('ProductList', () => {
   })
 
   it('renders success state with products', async () => {
-    jest.spyOn(global, 'fetch').mockResolvedValueOnce(
-      new Response(
-        JSON.stringify([
-          {
-            id: 1,
-            name: 'Product',
-            price: 9000,
-          },
-        ]),
-      ),
-    )
+    const products = [{ id: 1, name: 'Product', price: 9000 }]
+    jest
+      .spyOn(global, 'fetch')
+      .mockResolvedValueOnce(new Response(JSON.stringify(products)))
 
     const component = renderWithProviders(<ProductList />)
 
