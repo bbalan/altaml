@@ -1,18 +1,14 @@
 module.exports = {
-  preset: 'react-native',
-  transform: {
-    '^.+\\.jsx?$': 'babel-jest',
-    '^.+\\.(ts|tsx)$': 'ts-jest',
-  },
-  maxWorkers: 1, // Speed up tests
+  // preset: '@testing-library/react-native',
+  // preset: 'react-native',
+  preset: 'jest-expo',
   moduleNameMapper: {
     '^src/(.*)$': '<rootDir>/src/$1',
   },
-  // Speed up tests as per: https://github.com/kulshekhar/ts-jest/issues/259
-  globals: {
-    'ts-jest': {
-      isolatedModules: true,
-      tsconfig: 'tsconfig.json',
-    },
-  },
+  moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx', 'json'],
+  setupFilesAfterEnv: ['./jest-setup.ts'],
+
+  transformIgnorePatterns: [
+    '/node_modules/(?!((jest-)?react-native|@react-native(-community)?)|expo(nent)?|@expo(nent)?/.*|@expo-google-fonts/.*|react-navigation|@react-navigation/.*|@unimodules/.*|unimodules|sentry-expo|native-base|react-native-svg|@rneui)',
+  ],
 }
