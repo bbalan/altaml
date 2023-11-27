@@ -2,7 +2,7 @@ import { configureStore, combineReducers } from '@reduxjs/toolkit'
 import { useDispatch } from 'react-redux'
 import productsReducer from './products'
 
-const rootReducer = combineReducers({
+export const rootReducer = combineReducers({
   products: productsReducer,
 })
 
@@ -11,6 +11,8 @@ const store = configureStore({
 })
 
 export default store
+
+export type AppStore = typeof store
 
 export type AppDispatch = typeof store.dispatch
 export const useAppDispatch: () => AppDispatch = useDispatch
