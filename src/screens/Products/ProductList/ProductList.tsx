@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react'
 import { ScrollView, StyleSheet, Text } from 'react-native'
-import ProductListItem from '../ProductListItem'
+import ProductListItem from './ProductListItem'
 import { SafeAreaView } from 'react-native-safe-area-context'
 import { useTransparentNavBar } from 'src/utils/useTransparentNavBar'
 import { useDispatch, useSelector } from 'react-redux'
